@@ -139,3 +139,166 @@ function createDoctorsList() {
         });
     });
 }
+
+//Function for Selected Doctor Page
+function docInfoPage(selectedDoc) {
+    let docPic = document.querySelector(".doctor__profile__pic"); //Take the avatar
+    let docName = document.querySelector(".doctor__profile__info h3"); //Take the name
+    let docSpec = document.querySelector(".doctor__profile__info p"); //Take the specialization
+    let docAbout = document.querySelector(".doctor__about p");
+
+    docPic.src = `${selectedDoc.avatar}`;
+    docName.innerHTML = `${selectedDoc.name}`;
+    docSpec.innerHTML = `${selectedDoc.category}`;
+    docAbout.innerHTML = `${selectedDoc.about}`;
+}
+
+/*************************************** SEARCHING & FILTERING FUNCTIONS */
+
+//handle the search button
+function handleSearch() {
+    let submitSearch = document.querySelector(".dashboard__search button");
+    if (submitSearch.classList.contains("active")) cleanSearch();
+    //if search is alredy done, clean it
+    else searchDoctors(); //else search for doctors
+    submitSearch.classList.toggle("active"); //change the button status
+}
+
+//function for search doctors by name
+function searchDoctors() {
+    let input = document.querySelector("#search").value.toUpperCase();
+    let doctors = document.querySelectorAll(".list__item");
+
+    // Loop through all list items, and hide those who don't match the search query
+    doctors.forEach((doctor) => {
+        let nameTag = doctor.getElementsByTagName("h3")[0]; //take the h3 tag
+        let name = nameTag.innerText || nameTag.textContent; //take the h3 content
+        if (name.toUpperCase().indexOf(input) > -1) {
+            doctor.style.display = "";
+        } else {
+            doctor.style.display = "none";
+        }
+    });
+}
+
+//function for clear the search results
+function cleanSearch() {
+    let input = document.querySelector("#search");
+    let doctors = document.querySelectorAll(".list__item");
+    input.value = "";
+    doctors.forEach((doctor) => {
+        doctor.style.display = "";
+    });
+}
+
+function filterCategory(whatCategory) {
+    let categoryImg = document.querySelectorAll(".categories__slider__item img");
+    let categoryDesc = document.querySelectorAll(
+        ".categories__slider__item span"
+    );
+
+    let doctors = document.querySelectorAll(".list__item");
+    switch (whatCategory) {
+        case "dental":
+            doctors.forEach((doc) => {
+                if (doc.classList.contains("dental")) doc.style.display = "";
+                else doc.style.display = "none";
+            });
+            if (categoryDesc[0].textContent == "Dental Surgeon") {
+                categoryImg[0].style.background = "white";
+                categoryImg[0].src = "assets/images/icons/close_ico.svg";
+                categoryDesc[0].innerHTML = "Clear Search";
+            } else if (categoryDesc[0].textContent == "Clear Search") {
+                doctors.forEach((doc) => {
+                    doc.style.display = "";
+                });
+                categoryImg[0].style.background = " #4b7ffb";
+                categoryImg[0].src = "assets/images/icons/dental_ico.svg";
+                categoryDesc[0].innerHTML = "Dental Surgeon";
+            }
+            break;
+        case "heart":
+            doctors.forEach((doc) => {
+                if (doc.classList.contains("heart")) doc.style.display = "";
+                else doc.style.display = "none";
+            });
+            if (categoryDesc[1].textContent == "Heart Surgeon") {
+                categoryImg[1].style.background = "white";
+                categoryImg[1].src = "assets/images/icons/close_ico.svg";
+                categoryDesc[1].innerHTML = "Clear Search";
+            } else if (categoryDesc[1].textContent == "Clear Search") {
+                doctors.forEach((doc) => {
+                    doc.style.display = "";
+                });
+                categoryImg[1].style.background = "#ffb167";
+                categoryImg[1].src = "assets/images/icons/heart_ico.svg";
+                categoryDesc[1].innerHTML = "Heart Surgeon";
+            }
+            break;
+        case "eye":
+            doctors.forEach((doc) => {
+                if (doc.classList.contains("eye")) doc.style.display = "";
+                else doc.style.display = "none";
+            });
+            if (categoryDesc[2].textContent == "Eye Specialist") {
+                categoryImg[2].style.background = "white";
+                categoryImg[2].src = "assets/images/icons/close_ico.svg";
+                categoryDesc[2].innerHTML = "Clear Search";
+            } else if (categoryDesc[2].textContent == "Clear Search") {
+                doctors.forEach((doc) => {
+                    doc.style.display = "";
+                });
+                categoryImg[2].style.background = "#f57e71";
+                categoryImg[2].src = "assets/images/icons/eye_ico.svg";
+                categoryDesc[2].innerHTML = "Eye Specialist";
+            }
+            break;
+    }
+}
+
+/***************************************************** UTILITY FUNCTIONS */
+
+//Function for page transition animation
+function changePageAnimation(currentPage, finalPage, where) {
+    let preloader = document.querySelector("#preloader");
+
+    //Define Keyframes
+    let slideOutKeyFrames = [
+        { transform: "translateX(0%)" },
+        { transform: "translateX(-120%)" },
+    ];
+
+    let slideInKeyFrames = [
+        { transform: "translateX(120%)" },
+        { transform: "translateX(0)" },
+    ];
+
+    let slideOutReverseKeyFrames = [
+        { transform: "translateX(0%)" },
+        { transform: "translateX(120%)" },
+    ];
+
+    let slideInReverseKeyFrames = [
+        { transform: "translateX(-120%)" },
+        { transform: "translateX(0)" },
+    ];
+    //Let show preloader page and blur the current page
+
+    setTimeout(function() {
+        if (where == "next") {
+            let slideOut = currentPage.animate(slideOutKeyFrames, 500);
+            finalPage.animate(slideInKeyFrames, 500);
+            finalPage.style.display = "flex";
+            slideOut.onfinish = function() {
+                currentPage.style.display = "none";
+            };
+        } else if (where == "prew") {
+            currentPage.animate(slideOutReverseKeyFrames, 500);
+            finalPage.animate(slideInReverseKeyFrames, 500);
+            currentPage.style.transform = "";
+            finalPage.style.display = "flex";
+        }
+
+        currentPage.style.filter = "blur(0)";
+    }, 5);
+}
