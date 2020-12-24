@@ -1,4 +1,4 @@
-    @media screen and (min-width: 1224px) {
+@media screen and (min-width: 1224px) {
     body {
         overflow: hidden;
         overflow-y: hidden;
@@ -42,3 +42,35 @@
         z-index: -1;
     }
     /* KEYFRAMES */
+    @keyframes slide-in {
+        from {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes scale {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    @keyframes bg-animate {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-800px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+}
