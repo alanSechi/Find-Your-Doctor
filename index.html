@@ -40,7 +40,7 @@
             <h1>Hey!</h1>
             <h3>it looks like you are trying to visit the page in a Desktop!</h3>
             <p>
-                Please visit <a href="http://">Find Your Doctor</a> in your smartphone!
+                Please visit <a href="https://happy-beaver-b7a6d3.netlify.app/">Find Your Doctor</a> in your smartphone!
             </p>
         </div>
     </div>
@@ -56,6 +56,42 @@
         <button class="homepage__btn" onclick="changePageAnimation(homePage,dashboardPage, 'next'),  createCategoriesSlider(),  createDoctorsList()">
         Get Started
       </button>
+    </section>
+
+
+
+    <!--Find Your Doctor-->
+    <section class="dashboard">
+        <div class="menu --dash">
+            <button value="Menu">
+          <img src="assets/images/icons/menu_ico.svg" alt="menu" />
+        </button>
+            <ul class="menu--center">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <button class="--user">
+          <img src="assets/images/avatars/user_avatar.svg" alt="user" />
+        </button>
+        </div>
+        <h1>Find Your Desired Doctor</h1>
+        <div class="dashboard__search">
+            <input type="search" name="search" id="search" placeholder="Search for doctors" />
+            <button class="" type="submit" value="Search" onclick="handleSearch()"></button>
+        </div>
+
+        <a name="categories"></a>
+        <div class="dashboard__categories">
+            <h3>Categories</h3>
+            <div class="dashboard__categories__slider"></div>
+        </div>
+
+        <a name="doctors"></a>
+        <div class="dashboard__doctors">
+            <h3>Top Doctors</h3>
+            <!--Here is where JS write the section with the createDoctorPage()-->
+        </div>
     </section>
 
 
