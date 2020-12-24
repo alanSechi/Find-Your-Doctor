@@ -41,3 +41,6 @@ This page appear when the user click on a doctor (could be a filtered doctor, or
 ---
 
 ### Deploy Link
+
+
+[Find Your Doctor!](https://happy-beaver-b7a6d3.netlify.app/ "Try it!")
