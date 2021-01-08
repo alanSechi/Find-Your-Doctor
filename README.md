@@ -14,14 +14,9 @@ _HTML_, _CSS_, _Javascript_ <br>
  **Trello** for organize tasks with **Agile metodology**. <br>
 **Visual Studio Code** to make the code. <br>
 
-1. check the used device (_The app works only on mobile!_) 
-2. desktop page that shows a card to invite the user to switch to mobile device. <br><br>
-3. mobile
-For this, i've install **browsersync package** (_via npm_), 
-so i can watch the mobile version while i'm codin' it!
-<br>
+- _The desktop page shows a card that invite the user to switch to a mobile device. <br><br>
 
-For the mobile version i've created 3 different pages: <br>
+- _The mobile version has 3 different pages: <br>
 - Homepage  <br>
 - Dashboard Page <br>
 - Doctor Page <br>
@@ -41,6 +36,5 @@ This page appear when the user click on a doctor (could be a filtered doctor, or
 ---
 
 ### Deploy Link
-
 
 [Find Your Doctor!](https://happy-beaver-b7a6d3.netlify.app/ "Try it!")
