@@ -1,8 +1,8 @@
 /*************************
-        HOMEPAGE     
+        STARTPAGE     
 *************************/
 
-.homepage {
+.startpage {
     background: url("../../assets/images/webpjpg/homepage_bg.webp") bottom left no-repeat;
     background-size: contain;
     position: absolute;
@@ -13,19 +13,19 @@
     z-index: 1;
 }
 
-.homepage__title {
+.startpage__title {
     margin: 140px 62px 8px 40px;
     font-size: 30px;
 }
 
-.homepage__description {
+.startpage__description {
     width: 270px;
     margin: 0 4px 15px 40px;
     font-size: 16px;
     line-height: 24px;
 }
 
-.homepage__btn {
+.startpage__btn {
     width: 145px;
     height: 40px;
     background: #ef716b;
@@ -34,8 +34,8 @@
     color: white;
 }
 
-.homepage__btn:hover,
-.homepage__btn:active {
+.startpage__btn:hover,
+.startpage__btn:active {
     background-color: white;
     border: 1px solid #ef716b;
     color: #ef716b;
