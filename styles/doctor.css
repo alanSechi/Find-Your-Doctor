@@ -15,7 +15,7 @@
     height: 293px;
     background-image: url("../../assets/images/webpjpg/selected_doc_bg.webp");
     background-size: cover;
-    background-position: top center;
+    background-position: center;
     background-repeat: no-repeat;
     z-index: 0;
     position: fixed;
