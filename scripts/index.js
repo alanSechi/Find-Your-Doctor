@@ -1,5 +1,5 @@
 //Define all the sections
-const homePage = document.querySelector(".homepage");
+const startPage = document.querySelector(".startpage");
 const dashboardPage = document.querySelector(".dashboard");
 const doctorPage = document.querySelector(".selected__doctor");
 
@@ -49,6 +49,7 @@ window.onload = function() {
         console.log("You're in desktop");
     }
 };
+
 
 //Function for create categories slider
 function createCategoriesSlider() {
@@ -191,6 +192,7 @@ function cleanSearch() {
     });
 }
 
+//function for filter the categories
 function filterCategory(whatCategory) {
     let categoryImg = document.querySelectorAll(".categories__slider__item img");
     let categoryDesc = document.querySelectorAll(
@@ -258,9 +260,8 @@ function filterCategory(whatCategory) {
 
 /***************************************************** UTILITY FUNCTIONS */
 
-//Function for page transition animation
+//Function for page animation
 function changePageAnimation(currentPage, finalPage, where) {
-    let preloader = document.querySelector("#preloader");
 
     //Define Keyframes
     let slideOutKeyFrames = [
@@ -282,23 +283,19 @@ function changePageAnimation(currentPage, finalPage, where) {
         { transform: "translateX(-120%)" },
         { transform: "translateX(0)" },
     ];
-    //Let show preloader page and blur the current page
 
-    setTimeout(function() {
-        if (where == "next") {
-            let slideOut = currentPage.animate(slideOutKeyFrames, 500);
-            finalPage.animate(slideInKeyFrames, 500);
-            finalPage.style.display = "flex";
-            slideOut.onfinish = function() {
-                currentPage.style.display = "none";
-            };
-        } else if (where == "prew") {
-            currentPage.animate(slideOutReverseKeyFrames, 500);
-            finalPage.animate(slideInReverseKeyFrames, 500);
-            currentPage.style.transform = "";
-            finalPage.style.display = "flex";
-        }
 
-        currentPage.style.filter = "blur(0)";
-    }, 5);
+    if (where == "next") {
+        let slideOut = currentPage.animate(slideOutKeyFrames, 350);
+        finalPage.animate(slideInKeyFrames, 350);
+        finalPage.style.display = "flex";
+        slideOut.onfinish = function() {
+            currentPage.style.display = "none";
+        };
+    } else if (where == "prew") {
+        currentPage.animate(slideOutReverseKeyFrames, 350);
+        finalPage.animate(slideInReverseKeyFrames, 350);
+        currentPage.style.transform = slideOutKeyFrames;
+        finalPage.style.display = "flex";
+    }
 }
