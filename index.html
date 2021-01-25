@@ -53,7 +53,7 @@
         <p class="startpage__description">
             Lorem ipsum dolor amet, consectetur adipiscing inet deli
         </p>
-        <button class="startpage__btn" onclick="changePageAnimation(startPage,dashboardPage, 'next'),  createCategoriesSlider(),  createDoctorsList()">
+        <button id="js-startpageButton" class="startpage__btn">
         Get Started
       </button>
     </section>
@@ -78,7 +78,8 @@
         <h1>Find Your Desired Doctor</h1>
         <div class="dashboard__search">
             <input type="search" name="search" id="search" placeholder="Search for doctors" />
-            <button class="" type="submit" value="Search" onclick="handleSearch()"></button>
+            <button id="js-dashboardSearchButton" class="" type="submit" value="Search"></button>
+            <button id="js-dashboardSearchClearButton" class="" type="button" value="clear"></button>
         </div>
 
         <a name="categories"></a>
@@ -98,7 +99,7 @@
     <section class="selected__doctor">
         <div class="selected__doctor__bg">
             <div class="menu --doc">
-                <button onclick="changePageAnimation(doctorPage, dashboardPage, 'prew')">
+                <button id="js-backButton">
             <img src="assets/images/icons/go_back_ico.svg" alt="go-back" />
           </button>
                 <ul class="menu--center">
@@ -107,13 +108,13 @@
                     <li></li>
                 </ul>
                 <button>
-            <img src="assets/images/icons/dotted_menu_ico.svg " alt="menu " />
+            <img src="assets/images/icons/dotted_menu_ico.svg" alt="menu " />
           </button>
             </div>
         </div>
         <div class="selected__doctor__container ">
             <div class="doctor__profile ">
-                <img class="doctor__profile__pic " src="assets/images/avatars/doc_avatar_1.svg " alt="doc_avatar_1 " />
+                <img class="doctor__profile__pic " src="assets/images/avatars/doc_avatar_1.svg" alt="doc_avatar_1 " />
                 <div class="doctor__profile__info ">
                     <h3>
                         <!--Name-->
@@ -123,13 +124,13 @@
                     </p>
                     <ul>
                         <li>
-                            <img src="assets/images/icons/phone_ico.svg " alt="Call " />
+                            <img src="assets/images/icons/phone_ico.svg" alt="Call " />
                         </li>
                         <li>
-                            <img src="assets/images/icons/message_ico.svg " alt="Message " />
+                            <img src="assets/images/icons/message_ico.svg" alt="Message " />
                         </li>
                         <li>
-                            <img src="assets/images/icons/video_ico.svg " alt="Videocall " />
+                            <img src="assets/images/icons/video_ico.svg" alt="Videocall " />
                         </li>
                     </ul>
                 </div>

@@ -46,10 +46,12 @@
     transform: translateX(-20px);
 }
 
-.dashboard__search button.active {
+#js-dashboardSearchClearButton {
+    display: none;
     background-color: white;
     background-image: url("../../assets/images/icons/close_ico.svg");
     border: 1px solid #f57e71;
+  
 }
 
 
@@ -121,6 +123,11 @@
     transform: translateX(10px);
 }
 
+
+.clear {
+background: #ffffff;
+background-image: "../../assets/images/icons/close_ico.svg";
+}
 
 /* Top Doctors section ******************** */
 
