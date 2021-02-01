@@ -8,7 +8,6 @@ const getStartedButton = $$("js-startpageButton"); //startpage button
 const backButton = $$("js-backButton"); //back button from the selected doctor section
 const searchButton = $$("js-dashboardSearchButton"); //dashboard search button
 const clearButton = $$("js-dashboardSearchClearButton"); //dashboard clear search button
-var clicked = false; //var for the toogle
 
 /************************************************define al classes and arrays*/
 
@@ -80,8 +79,13 @@ let categories = [
   )),
 ]; //category array
 
+
+class fltrddctrs {
+ 
+}
+
 /*************************************************Define all the click events*/
-getStartedButton.onclick = function () {
+getStartedButton.onclick = function (cat) {
   changePageAnimation(startPage, dashboardPage, "next");
   createCategoriesSlider();
   createDoctorsList();
@@ -155,44 +159,7 @@ function createCategoriesSlider() {
     sliderItem.className = "categories__slider__item";
     sliderItem.classList.add(`${cat.classes}`);
     sliderItem.onclick = function () {
-      let filteredDoctors = doctors.filter(
-        (doctor) => doctor.specialization == cat.classes
-      ); // filter the doctors by categories
-
-      console.log(filteredDoctors); //print the result of the filter
-
-      //define the image, the text, and the list that has to be changed
-      let categoryImg = document.querySelectorAll(
-        ".categories__slider__item img"
-      );
-      let categoryDesc = document.querySelectorAll(
-        ".categories__slider__item span"
-      );
-
-      let dctrslst = document.querySelectorAll(".list__item");
-
-      //function to change the list, the texts and the image
-      dctrslst.forEach((doc) => {
-        if (doc.classList.contains(sliderItem.classList[1])) {
-          categoryDesc[i].innerHTML = "Clear Search";
-          doc.style.display = "flex";
-        } else doc.style.display = "none";
-      });
-      //toggle to filter and clear the filter
-      if (clicked) {
-        categoryImg[i].style.background = "white"; //change the background
-        categoryImg[i].src = "assets/images/icons/close_ico.svg"; //change the icon
-        categoryDesc[i].innerHTML = "Clear Search"; //change the text
-        clicked = false;
-      } else {
-        dctrslst.forEach((doctor) => {
-          doctor.style.display = "flex";
-        });
-        categoryImg[i].style.background = cat.color; //change the background
-        categoryImg[i].src = cat.icon; //change the icon
-        categoryDesc[i].innerHTML = cat.category; //change the text
-        clicked = true;
-      }
+      filterCategories(cat, sliderItem, i);
     };
     let SliderItemImg = document.createElement("img"); //create the icon element
     SliderItemImg.src = cat.icon;
@@ -205,11 +172,12 @@ function createCategoriesSlider() {
   });
 }
 
-//function for create doctor list
+/***********************************************************************function for create doctor list*/
 
 function createDoctorsList() {
   let startPoint = document.querySelector(".dashboard__doctors h3"); //where start to append items
   let list = document.createElement("ul");
+  list.id = "doctorList";
   list.className = "list";
   startPoint.appendChild(list);
 
@@ -326,4 +294,70 @@ function changePageAnimation(currentPage, finalPage, where) {
     currentPage.style.transform = slideOutKeyFrames;
     finalPage.style.display = "flex";
   }
+}
+
+function filterCategories(cat, sliderItem, i) {
+  let filteredDoctors = doctors.filter(
+    (doctor) => doctor.specialization == cat.classes
+  ) ; // filter the doctors by categories
+
+
+  //define the image, the text, and the list that has to be changed
+  let categoryImg = document.querySelectorAll(".categories__slider__item img");
+  let categoryDesc = document.querySelectorAll(
+    ".categories__slider__item span"
+  );
+  
+  console.log(document.getElementsByClassName("list__item"))
+ 
+
+  sliderItem.classList.toggle("clicked");
+
+  //toggle to filter and clear the filter
+  if (sliderItem.classList.contains("clicked")) {
+    categoryImg[i].style.background = "white"; //change the background
+    categoryImg[i].src = "assets/images/icons/close_ico.svg"; //change the icon
+    categoryDesc[i].innerHTML = "Clear Search"; //change the text
+    document.getElementById("doctorList").style.display = "none";
+    createFilteredDoctorsList(filteredDoctors);
+  } else {
+    document.getElementById("doctorList").style.display = "";
+    document.getElementById("filteredDoctorList").remove();
+
+    categoryImg[i].style.background = cat.color; //change the background
+    categoryImg[i].src = cat.icon; //change the icon
+    categoryDesc[i].innerHTML = cat.category; //change the text
+  }
+}
+
+function createFilteredDoctorsList(filteredDoctors) {
+  let startPoint = document.querySelector(".dashboard__doctors h3"); //where start to append items
+  let list = document.createElement("ul");
+  list.className = "list";
+  list.id = "filteredDoctorList";
+  startPoint.appendChild(list);
+  filteredDoctors.forEach((doctor, i) => {
+    let listItem = document.createElement("li");
+    listItem.className = "list__item";
+    listItem.style.background = doctor.color;
+    let avatar = document.createElement("img");
+    avatar.src = doctor.avatar;
+    let infoBox = document.createElement("div");
+    infoBox.className = "list__item__info";
+    let name = document.createElement("h3");
+    let spec = document.createElement("p");
+    listItem.classList.add(doctor.specialization);
+    list.appendChild(listItem);
+    listItem.appendChild(avatar);
+    listItem.appendChild(infoBox);
+    infoBox.appendChild(name);
+    name.innerText = doctor.name;
+    infoBox.appendChild(spec);
+
+    spec.innerText = doctor.category;
+    listItem.addEventListener("click", (event) => {
+      changePageAnimation(dashboardPage, doctorPage, "next");
+      docInfoPage(doctor);
+    });
+  });
 }
